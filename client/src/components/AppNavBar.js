@@ -53,7 +53,7 @@ export default class AppNavBar extends Component {
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
-          <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><strong>GI</strong></MenuItem>
+          <div className="nav-wrapper"><MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><span className="nav-title">GI</span></MenuItem></div>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi1'>Pappi1</Link></MenuItem>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi2'>Pappi2</Link></MenuItem>
         </Drawer>

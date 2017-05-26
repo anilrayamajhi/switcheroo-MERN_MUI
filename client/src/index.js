@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, browserHistory } from 'react-router';
 import ReduxPromise from 'redux-promise';
+require('../style/style.scss');
 
 
 import routes from './config/routes';

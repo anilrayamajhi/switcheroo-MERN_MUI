@@ -14,7 +14,17 @@ module.exports = {
       query: {
         presets: ['react', 'es2015', 'stage-1']
       }
-    }]
+    },{
+      test:/\.scss$/,
+      loader:'style-loader!css-loader!sass-loader'
+    },{
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      loader: 'file-loader',
+      options: {
+        name: '[path][name].[hash].[ext]',
+      },
+    }
+  ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
