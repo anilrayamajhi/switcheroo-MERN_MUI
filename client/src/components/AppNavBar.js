@@ -16,7 +16,11 @@ export default class AppNavBar extends Component {
 
   handleToggle = () => this.setState({open: !this.state.open});
 
-  handleClose = () => this.setState({open: false});
+  handleClose = () => {
+    setTimeout(() => {
+      this.setState({open: false})
+    }, 400)
+  };
 
   render(){
     return(
@@ -49,8 +53,9 @@ export default class AppNavBar extends Component {
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
+          <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><strong>GI</strong></MenuItem>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi1'>Pappi1</Link></MenuItem>
-        <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi2'>Pappi2</Link></MenuItem>
+          <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi2'>Pappi2</Link></MenuItem>
         </Drawer>
       </div>
     )
