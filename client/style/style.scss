@@ -3,10 +3,41 @@ body {
 }
 
 .nav-wrapper{
-  .nav-title {
-    color: pink;
-    font-family: 'Billabong';
-    font-size: 37px;
-  }
   margin: 17px auto;
+}
+
+.nav-title {
+  color: pink;
+  font-family: 'Billabong';
+  font-size: 37px;
+}
+
+.affix-appBar {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 4;
+}
+
+.children-wrapper{
+  margin: 107px auto 77px;
+}
+
+a:focus, a:hover {
+  text-decoration:none;
+  color: black;
+}
+
+a {
+  color: #5d5d5d;
+}
+
+.authwrapper {
+  text-align: center;
+  margin: 57px auto;
+}
+
+.register-path{
+  margin-right: 3em;
 }

@@ -11,7 +11,7 @@ const iconStyles = {
 export default class AppNavBar extends Component {
   constructor(props) {
     super(props)
-    this.state = {open: false};
+    this.state = {open: false, open1: false};
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -22,15 +22,23 @@ export default class AppNavBar extends Component {
     }, 400)
   };
 
+  handleToggle1 = () => this.setState({open1: !this.state.open1});
+
+  handleClose1 = () => {
+    setTimeout(() => {
+      this.setState({open1: false})
+    }, 400)
+  };
+
+
   render(){
     return(
       <div>
+        <div className="affix-appBar">
         <AppBar
-          title={"GI"}
           style={{backgroundColor:grey800}}
-          titleStyle={{textAlign:"right"}}
           showMenuIconButton={true}
-
+          zDepth={3}
           iconElementLeft={
             <IconButton
               iconClassName="material-icons"
@@ -42,7 +50,17 @@ export default class AppNavBar extends Component {
               >
               dashboard
             </IconButton>}
+            iconElementRight={
+              <IconButton
+                iconClassName="material-icons"
+                touch={true}
+                onTouchTap={this.handleToggle1}
+                onClick={this.handleToggle1}
+                >
+                keyboard_arrow_left
+              </IconButton>}
         />
+    </div>
 
       {/* **************************************************** */}
 
@@ -53,9 +71,30 @@ export default class AppNavBar extends Component {
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
-          <div className="nav-wrapper"><MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><span className="nav-title">GI</span></MenuItem></div>
+          <div className="nav-wrapper"><MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/'><span className="nav-title">GI</span></Link></MenuItem></div>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi1'>Pappi1</Link></MenuItem>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi2'>Pappi2</Link></MenuItem>
+        </Drawer>
+
+        <Drawer width={50} openSecondary={true} open={this.state.open1} onRequestChange={(open1) => this.setState({open1})}>
+          <div className="nav-wrapper">
+            <IconButton
+            iconClassName="material-icons"
+            touch={true}
+            onTouchTap={this.handleClose1}
+            onClick={this.handleClose1}
+            >
+            <Link to='/'>home</Link>
+          </IconButton></div>
+        <br />
+          <IconButton
+            iconClassName="material-icons"
+            touch={true}
+            onTouchTap={this.handleClose1}
+            onClick={this.handleClose1}
+            >
+            <Link to='/login'>account_circle</Link>
+          </IconButton>
         </Drawer>
       </div>
     )
