@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import {AppBar, IconButton, Drawer, MenuItem, RaisedButton} from 'material-ui';
 import {grey800} from 'material-ui/styles/colors';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 
 const iconStyles = {
   color: grey800,
 };
 
-export default class AppNavBar extends Component {
+class AppNavBar extends Component {
   constructor(props) {
     super(props)
     this.state = {open: false, open1: false};
@@ -29,6 +31,18 @@ export default class AppNavBar extends Component {
       this.setState({open1: false})
     }, 400)
   };
+
+
+  handleAuth() {
+  if(this.props.authenticated){
+    return (
+        <span onClick={() => this.props.authenticate(false)}>Sign Out</span>
+    )
+  }
+    return (
+      <span onClick={() => this.props.authenticate(true)}>Sign In</span>
+    )
+}
 
 
   render(){
@@ -74,6 +88,7 @@ export default class AppNavBar extends Component {
           <div className="nav-wrapper"><MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/'><span className="nav-title">GI</span></Link></MenuItem></div>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi1'>Pappi1</Link></MenuItem>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi2'>Pappi2</Link></MenuItem>
+          <MenuItem>{this.handleAuth()}</MenuItem>
         </Drawer>
 
         <Drawer width={50} openSecondary={true} open={this.state.open1} onRequestChange={(open1) => this.setState({open1})}>
@@ -100,3 +115,11 @@ export default class AppNavBar extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return(
+    {authenticated: state.authenticated}  //this state is redux state from reducers/index.js
+  )
+}
+
+export default connect(mapStateToProps, actions)(AppNavBar);
