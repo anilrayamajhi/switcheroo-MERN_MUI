@@ -13,7 +13,7 @@ export default (
   <Route path='/' component={App} >
     <IndexRoute component={HomeState} />
     <Route path="pappi1" component={RequireAuth(Page1)} />
-    <Route path="pappi2" component={Page2} />
+    <Route path="pappi2" component={RequireAuth(Page2)} />
     <Route path="login" component={Login} />
     {/* <DefaultRoute handler={App} /> */}
   </Route>

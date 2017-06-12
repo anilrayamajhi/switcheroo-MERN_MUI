@@ -3,7 +3,8 @@ import {AppBar, IconButton, Drawer, MenuItem, RaisedButton} from 'material-ui';
 import {grey800} from 'material-ui/styles/colors';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+// import * as actions from '../actions';
+import { CHANGE_AUTH, authenticate } from '../actions/index';
 
 
 const iconStyles = {
@@ -24,7 +25,11 @@ class AppNavBar extends Component {
     }, 400)
   };
 
-  handleToggle1 = () => this.setState({open1: !this.state.open1});
+  handleToggle1 = () => {
+    setTimeout(() => {
+      this.setState({open1: !this.state.open1})
+    }, 400)
+  };
 
   handleClose1 = () => {
     setTimeout(() => {
@@ -42,7 +47,22 @@ class AppNavBar extends Component {
     return (
       <span onClick={() => this.props.authenticate(true)}>Sign In</span>
     )
-}
+  }
+
+  profileAvatar() {
+    if(!!this.props.authenticated){
+      return(
+        <IconButton
+          iconClassName="material-icons"
+          touch={true}
+          onTouchTap={this.handleClose1}
+          onClick={this.handleClose1}
+          >
+          <Link to='/login'>account_circle</Link>
+        </IconButton>
+      )
+    }
+  }
 
 
   render(){
@@ -88,11 +108,19 @@ class AppNavBar extends Component {
           <div className="nav-wrapper"><MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/'><span className="nav-title">GI</span></Link></MenuItem></div>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi1'>Pappi1</Link></MenuItem>
           <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}><Link to='/pappi2'>Pappi2</Link></MenuItem>
-          <MenuItem>{this.handleAuth()}</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} onClick={this.handleClose}>{this.handleAuth()}</MenuItem>
         </Drawer>
 
-        <Drawer width={50} openSecondary={true} open={this.state.open1} onRequestChange={(open1) => this.setState({open1})}>
+        <Drawer docked={false} width={50} openSecondary={true} open={this.state.open1} onRequestChange={(open1) => this.setState({open1})}>
           <div className="nav-wrapper">
+            <IconButton
+              iconClassName="material-icons"
+              touch={true}
+              onTouchTap={this.handleToggle1}
+              onClick={this.handleToggle1}
+              >
+              keyboard_arrow_right
+            </IconButton><br /><br />
             <IconButton
             iconClassName="material-icons"
             touch={true}
@@ -100,20 +128,20 @@ class AppNavBar extends Component {
             onClick={this.handleClose1}
             >
             <Link to='/'>home</Link>
-          </IconButton></div>
-        <br />
-          <IconButton
-            iconClassName="material-icons"
-            touch={true}
-            onTouchTap={this.handleClose1}
-            onClick={this.handleClose1}
-            >
-            <Link to='/login'>account_circle</Link>
-          </IconButton>
+            </IconButton>
+            <br /><br />
+            {this.profileAvatar()}
+          </div>
         </Drawer>
       </div>
     )
   }
+}
+
+const puke = (obj) => {
+  return(
+    <pre>{JSON.stringify(obj, null, " ")}</pre>
+  )
 }
 
 const mapStateToProps = (state) => {
@@ -122,4 +150,5 @@ const mapStateToProps = (state) => {
   )
 }
 
-export default connect(mapStateToProps, actions)(AppNavBar);
+// export default connect(mapStateToProps, actions)(AppNavBar);
+export default connect(mapStateToProps, { CHANGE_AUTH, authenticate })(AppNavBar);

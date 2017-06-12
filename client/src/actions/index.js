@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import { browserHistory } from 'react-router';
 export const FETCH_POSTS = 'FETCH_POSTS';
-const CHANGE_AUTH = 'change_auth';
+export const CHANGE_AUTH = 'change_auth';
 // export const FETCH_BLOG = 'FETCH_BLOG';
 // export const CREATE_POST = 'CREATE_POST';
 // export const DELETE_POST = 'DELETE_POST';
